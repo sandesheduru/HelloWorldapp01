@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/target/*.war'
 
       - name: Step 5 List the current directory
         run: ls -a
@@ -36,4 +36,4 @@ jobs:
       - name: Step-6 List the target directory
         run: |
           cd target
-          ls -a 
+          ls -a

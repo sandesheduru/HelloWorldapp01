@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy app to Azure Web App - rahultestwebapp04
+name: Build and deploy JAR app to Azure Web App - rahultestwebapp04
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Dev'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
@@ -58,6 +58,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'rahultestwebapp04'
-          slot-name: 'dev'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
           package: '*.war'

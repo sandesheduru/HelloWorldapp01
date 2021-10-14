@@ -20,23 +20,43 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
+          
+      - name: Step 2- Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+          
+      - name: Step 3- Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+          
+      - name: Step 4- Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orgtest-rahul_helloworldWebapp05
 
-      - name: Step 2- Maven clean install
-        run: mvn clean install
+      # - name: Step 2- Maven clean install
+      #   run: mvn clean install
 
-      - name: Step 3 - build with maven
+      - name: Step 5 - build with maven
         run: mvn -B package --file pom.xml
 
-      - name: Step 4 -Upload artifact for deployment job
+      - name: Step 6 -Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
 
-      - name: Step 5 List the current directory
+      - name: Step 7 List the current directory
         run: ls -a
         
-      - name: Step-6 List the target directory
+      - name: Step-8 List the target directory
         run: |
           cd target
           ls -a 

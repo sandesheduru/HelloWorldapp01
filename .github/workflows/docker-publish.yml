@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build docker image rahultestwebapp04
+name: Build and deploy war app to Azure Web App - rahultestwebapp04
 
 on:
   push:
@@ -32,9 +32,17 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Step 5 - docker build
+      - name: Step 5 List the current directory
+        run: ls -a
+        
+      - name: Step-6 List the target directory
+        run: |
+          cd target
+          ls -a
+
+      - name: Step 7 - docker build
         run: |
           docker build . -t demo.war
 
-      - name: Step 6 List the docker images
+      - name: Step 8 List the docker images
         run: docker image ls   

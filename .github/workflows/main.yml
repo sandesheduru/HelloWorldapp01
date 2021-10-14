@@ -14,41 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2     
 
-      - name: Step 1- Set up Java version
-        uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-
-      - name: Step 2- Maven clean install
-        run: mvn clean install
-
-      - name: Step 3 - build with maven
-        run: mvn -B package --file pom.xml
-
-      - name: Step 4 -Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.war'
-
-      - name: Step 5 List the current directory
-        run: ls -a
-        
-      - name: Step-6 List the target directory
-        run: |
-          cd target
-          ls -a 
-
-      - name: step-7 ACR login
+      - name: step-1 ACR login
         uses: azure/docker-login@v1
         with:
           login-server: rahultestwebapp04acr.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Step -8 docker build and push
+      - name: Step -2 docker build and push
         run: |
           docker build . -t demo:1.0
           docker push demo:1.0

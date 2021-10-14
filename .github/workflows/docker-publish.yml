@@ -34,7 +34,7 @@ jobs:
 
       - name: Step 5 - docker build
         run: |
-          docker build . -t demo.war .
+          docker build . -t demo.war
 
       - name: Step 6 List the docker images
         run: docker image ls   

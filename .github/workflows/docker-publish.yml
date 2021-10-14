@@ -1,0 +1,40 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build docker image rahultestwebapp04
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1- Checkout
+        uses: actions/checkout@v2 
+
+      - name: Step 2- Set up Java version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'    
+
+      - name: Step 3 - build with maven
+        run: mvn -B package --file pom.xml
+
+      - name: step-4 ACR login
+        uses: azure/docker-login@v1
+        with:
+          login-server: rahultestwebapp04acr.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Step 5 - docker build
+        run: |
+          docker build . -t demo.war .
+
+      - name: Step 6 List the docker images
+        run: docker image ls   

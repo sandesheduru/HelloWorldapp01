@@ -40,24 +40,15 @@ jobs:
         run: |
           cd target
           ls -a 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    steps:
-      - name: Step 1- Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
 
-      - name: Step 2- Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+      - name: step-7 ACR login
+        uses: azure/docker-login@v1
         with:
-          app-name: 'rahultestwebapp04'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
-          package: '*.war'
+          login-server: rahultestwebapp04acr.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Step -8 docker build and push
+        run: |
+          docker build . -t demo:1.0
+          docker push demo:1.0

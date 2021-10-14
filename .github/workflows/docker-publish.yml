@@ -43,7 +43,7 @@ jobs:
       - name: Step 7 - docker build
         run: |
           docker build . -t demo.war
-          docker push demo.war:latest
+          docker push rahultestwebapp04acr.azurecr.io/demo.war:latest
 
       - name: Step 8 List the docker images
         run: docker image ls   

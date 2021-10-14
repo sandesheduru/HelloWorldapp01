@@ -23,7 +23,15 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Step -2 docker build and push
+      - name: Step 2 List the current directory
+        run: ls -a
+        
+      - name: Step-3 List the target directory
+        run: |
+          cd target
+          ls -a 
+          
+      - name: Step -4 docker build and push
         run: |
           docker build . -t demo:1.0
           docker push demo:1.0

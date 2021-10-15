@@ -4,9 +4,6 @@
 name: Build and publish docker image to ACR
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
 
 jobs:

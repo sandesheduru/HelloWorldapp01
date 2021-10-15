@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy war app to Azure Web App - rahultestwebapp04
+name: Build and deploy 
 
 on:
   push:
@@ -14,52 +14,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Step 1- Checkout
+        uses: actions/checkout@v2
 
-      - name: Step 1- Set up Java version
+      - name: Step 2- Set up Java version
         uses: actions/setup-java@v1
         with:
           java-version: '11'
           
-      - name: Step 2- Cache SonarCloud packages
+      - name: Step 3- Cache SonarCloud packages
         uses: actions/cache@v1
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
           
-      - name: Step 3- Cache Maven packages
+      - name: Step 4- Cache Maven packages
         uses: actions/cache@v1
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
           
-      - name: Step 4- Build and analyze
+      - name: Step 5- Build and code analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orgtest-rahul_helloworldWebapp05
 
-      # - name: Step 2- Maven clean install
-      #   run: mvn clean install
-
-      - name: Step 5 - build with maven
+      - name: Step 6 - build with maven
         run: mvn -B package --file pom.xml
 
-      - name: Step 6 -Upload artifact for deployment job
+      - name: Step 7 -Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
 
-      - name: Step 7 List the current directory
-        run: ls -a
-        
-      - name: Step-8 List the target directory
-        run: |
-          cd target
-          ls -a 
+    
+      
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -81,3 +74,15 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
           package: '*.war'
+      
+      - name: step-3 ACR login
+        uses: azure/docker-login@v1
+        with:
+          login-server: rahultestwebapp04acr.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Step 4 - docker build
+        run: |
+          docker build . -t rahultestwebapp04acr.azurecr.io/demo:1.0
+          docker push rahultestwebapp04acr.azurecr.io/demo:1.0

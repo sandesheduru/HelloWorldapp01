@@ -1,8 +1,7 @@
 # Demo Java Web App
 
-[![BoltOps Badge](https://img.boltops.com/boltops/badges/boltops-badge.png)](https://www.boltops.com)
+[![Build and deploy Java app](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/main.yml/badge.svg)](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/main.yml)
 
-Simple java project demos how to build a war file to be deployed on a Tomcat server.
 
 ## Build
 

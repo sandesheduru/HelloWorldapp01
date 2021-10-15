@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy 
+name: Build and deploy war app to Azure Web App - rahultestwebapp04
 
 on:
   push:
@@ -45,13 +45,25 @@ jobs:
       - name: Step 6 - build with maven
         run: mvn -B package --file pom.xml
 
-      - name: Step 7 -Upload artifact for deployment job
+      - name: step-7 ACR login
+        uses: azure/docker-login@v1
+        with:
+          login-server: rahultestwebapp04acr.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Step 8 - Docker build and push to ACR
+        run: |
+          docker build . -t rahultestwebapp04acr.azurecr.io/demo:1.0
+          docker push rahultestwebapp04acr.azurecr.io/demo:1.0
+
+      - name: Step 9 -Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
 
-    
+
       
   deploy:
     runs-on: ubuntu-latest
@@ -75,14 +87,4 @@ jobs:
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
           package: '*.war'
       
-      - name: step-3 ACR login
-        uses: azure/docker-login@v1
-        with:
-          login-server: rahultestwebapp04acr.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Step 4 - docker build
-        run: |
-          docker build . -t rahultestwebapp04acr.azurecr.io/demo:1.0
-          docker push rahultestwebapp04acr.azurecr.io/demo:1.0
+     

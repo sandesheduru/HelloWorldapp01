@@ -31,8 +31,8 @@ The app is a small demo of a java servlet app.  Here's the source code to url ma
 
 Source | Url
 --- | ---
-src/main/java/Hello.java | http://rahultestwebapp04.azurewebsites.net/demo/Hello
-src/main/webapp/index.jsp | http://rahultestwebapp04.azurewebsites.net/demo/index.jsp
+src/main/java/Hello.java | https://rahultestwebapp04.azurewebsites.net/demo/Hello
+src/main/webapp/index.jsp | https://rahultestwebapp04.azurewebsites.net/demo/index.jsp
 
 ## Run
 

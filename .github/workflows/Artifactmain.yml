@@ -24,6 +24,14 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
+          
+      - name: Step 7 List the current directory
+        run: ls -a
+        
+      - name: Step-8 List the target directory
+        run: |
+          cd target
+          ls -a 
       
       - name: Step 2 - Maven Deploy
         run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -DartifactId="demo" -Dfile='${{ github.workspace }}/target/*.war'

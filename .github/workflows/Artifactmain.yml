@@ -18,8 +18,15 @@ jobs:
           
       - name: Step 2 - Maven Build
         run: mvn -B package --file pom.xml
+        
+      - name: Step 3 -Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/target/*.war'
       
       - name: Step 2 - Maven Deploy
-        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl=${{ env.AZURE_ARTIFACTS_FEED_URL }} -DgroupId="com.domain" -DartifactId="demo"
+        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -DartifactId="demo" -Dfile='${{ github.workspace }}/target/*.war'
+        
         
         

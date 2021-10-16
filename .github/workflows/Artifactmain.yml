@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v2
           
       - name: Step 2 - Maven package creation
-        run: mvn -B archetype:generate -DarchetypeGroupId="org.apache.maven.archetypes" -DgroupId="com.domain" -DartifactId="demo"
+        run: mvn -B archetype:generate -DgroupId="com.domain" -DartifactId="demo"

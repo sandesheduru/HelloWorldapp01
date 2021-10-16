@@ -21,3 +21,6 @@ jobs:
         with:
           java-version: ${{ env.JAVA_VERSION }}
           source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+          server-id: "rahulartifactfeed"
+          server-username: "July2021"
+          server-password: ${{ secrets.AZURE_ARTIFACTS_PAT }} 

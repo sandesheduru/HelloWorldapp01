@@ -3,10 +3,6 @@ name: Build and Publish Azure Artifact
 on:
   workflow_dispatch:
   
-env:
-  AZURE_ARTIFACTS_FEED_URL: https://pkgs.dev.azure.com/July2021/TerraformSample/_packaging/rahulartifactfeed/maven/v1    
-  BUILD_CONFIGURATION: 'Release'    # set this to the appropriate build configuration
-  JAVA_VERSION: '11' 
 
 jobs:
   build:
@@ -15,33 +11,19 @@ jobs:
     steps:
       - name: Step 1- Checkout
         uses: actions/checkout@v2
-          
-      - name: Step 2 - Maven Build
-        run: mvn -B package --file pom.xml        
-        
-      - name: Step 7 List the current directory
-        run: ls -a
-        
-      - name: Step-8 List the target directory
-        run: |
-          cd target
-          ls -a 
-          
-      
-      - name: Step 9 -Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+
+      - name: Step 2- Set up Java version
+        uses: actions/setup-java@v1
         with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.war'
-          
-      - name: Step 1- Download artifact from build job
-        uses: actions/download-artifact@v2
+          java-version: '11'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v2
         with:
-          name: java-app
-          
-      
-      - name: Step 2 - Maven Deploy
-        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -Dversion="1.0-SNAPSHOT" -DartifactId="demo" -Dfile='${{ github.workspace }}/target'
-        
-        
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+            
+      - name: Test with Maven
+        run: mvn -B test --file pom.xml
         

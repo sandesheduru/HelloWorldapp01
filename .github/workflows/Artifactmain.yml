@@ -41,7 +41,7 @@ jobs:
           
       
       - name: Step 2 - Maven Deploy
-        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -DartifactId="demo" -Dfile='${{ github.workspace }}/target'
+        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -Dversion="1.0-SNAPSHOT" -DartifactId="demo" -Dfile='${{ github.workspace }}/target'
         
         
         

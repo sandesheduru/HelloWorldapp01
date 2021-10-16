@@ -5,25 +5,29 @@ import org.junit.Test;
 
 public class ScoreTest {
 
-@Test
+	@Test
 	public void testToString1() {
 	
 		Assert.assertTrue(1>0);
 	}
+	@Test
 	public void testToString2() {
 	
 		Assert.assertTrue(1>0);
 	}
-
+	
+	@Test
 	public void testToString3() {
 	
 		Assert.assertTrue(1>0);
 	}
+	@Test
 	public void testToString4() {
 	
 		Assert.assertTrue(1>0);
 	}
-
+	
+	@Test
 	public void testToString5() {
 	
 		Assert.assertTrue(1>2);

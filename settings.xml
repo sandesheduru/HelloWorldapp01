@@ -1,0 +1,12 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>rahulartifactfeed</id>
+      <username>July2021</username>
+      <password>36sevh4p5talseurldo3qozmbev4jtlu7ellhding5bqtvygbmiq</password>
+    </server>
+  </servers>
+</settings>

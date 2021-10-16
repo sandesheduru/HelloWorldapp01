@@ -26,9 +26,22 @@ jobs:
         run: |
           cd target
           ls -a 
+          
+      
+      - name: Step 9 -Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/target/*.war'
+          
+      - name: Step 1- Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
+          
       
       - name: Step 2 - Maven Deploy
-        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -DartifactId="demo" -Dfile='target/*.war'
+        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl='${{ env.AZURE_ARTIFACTS_FEED_URL }}' -DgroupId="com.domain" -DartifactId="demo" -Dfile='*.war'
         
         
         

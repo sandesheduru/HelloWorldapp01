@@ -9,7 +9,7 @@
   <url>https://github.com/tongueroo/demo-java</url>
   <build>
     <finalName>demo</finalName>
-    <sourceDirectory>src</sourceDirectory>
+   
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

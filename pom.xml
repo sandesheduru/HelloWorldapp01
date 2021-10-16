@@ -32,7 +32,7 @@
 </properties>
   
 
-  <repositories>
+ <repositories>
        <repository>
                   <id>rahulartifactfeed</id>
                   <url>https://pkgs.dev.azure.com/July2021/TerraformSample/_packaging/rahulartifactfeed/maven/v1</url>
@@ -42,9 +42,7 @@
                   <snapshots>
                     <enabled>true</enabled>
                   </snapshots>
-                </repository>
-    <repository>
-     
+                </repository>        
   </repositories>
  
  

@@ -37,7 +37,7 @@ jobs:
         
       - name: Step-8 List the target directory
         run: |
-          cd surefire-reports
+          cd target/surefire-reports
           ls -a
           
           

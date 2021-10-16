@@ -16,5 +16,10 @@ jobs:
       - name: Step 1- Checkout
         uses: actions/checkout@v2
           
-      - name: Step 2 - Maven package creation
-        run: mvn -B archetype:generate -DgroupId="com.domain" -DartifactId="demo"
+      - name: Step 2 - Maven Build
+        run: mvn -B package --file pom.xml
+      
+      - name: Step 2 - Maven Deploy
+        run: mvn deploy:deploy-file -Dpackaging="war" -DrepositoryId="rahulartifactfeed" -Durl=${{ env.AZURE_ARTIFACTS_FEED_URL }} -DgroupId="com.domain" -DartifactId="demo"
+        
+        

@@ -29,6 +29,18 @@
   <sonar.organization>orgtest-rahul</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
+  
+  <repository>
+  <id>rahulartifactfeed</id>
+  <url>https://pkgs.dev.azure.com/July2021/TerraformSample/_packaging/rahulartifactfeed/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

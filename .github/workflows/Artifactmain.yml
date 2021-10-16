@@ -1,0 +1,17 @@
+name: Build and Publish Azure Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1- Checkout
+        uses: actions/checkout@v2
+
+      - name: Step 2- Set up Java version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'

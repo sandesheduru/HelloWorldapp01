@@ -32,6 +32,12 @@ public class ScoreTest {
 	
 		Assert.assertTrue(1>0);
 	}
+	
+	@Test
+	public void testToString6() {
+	
+		Assert.assertTrue(1>0);
+	}
 
 
 }

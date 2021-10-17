@@ -5,8 +5,8 @@
 
 ## Build
 
-Build and Deploy to Azure Web App
-Build and create Docker image and push to ACR, then run through webapp using Webhook
+* Build and Deploy to Azure Web App
+* Build and create Docker image and push to ACR, then run through webapp using Webhook
 
 
 ## What happened

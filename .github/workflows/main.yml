@@ -4,8 +4,6 @@
 name: Build and deploy Java app
 
 on:
- push:
-    branches: [ DevBranch ]
  pull_request:
     branches: [ master ]
  workflow_dispatch:

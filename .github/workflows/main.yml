@@ -4,11 +4,14 @@
 name: Build and deploy Java app
 
 on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
-
+ push:
+    branches: [ DevBranch ]
+ pull_request:
+    branches: [ master ]
+ workflow_dispatch:
+  
+  
+  
 jobs:
   build:
     runs-on: ubuntu-latest

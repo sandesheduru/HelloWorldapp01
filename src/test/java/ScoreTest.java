@@ -1,4 +1,6 @@
+
 package com.mcnz.rps;
+
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,7 +39,15 @@ public class ScoreTest {
 	public void testToString6() {
 	
 		Assert.assertTrue(1>0);
+	
 	}
+	
+	@Test
+        public void testToString7() {
+
+                Assert.assertTrue(1>0);
+
+        }
 
 
 }

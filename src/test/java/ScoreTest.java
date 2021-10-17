@@ -38,6 +38,13 @@ public class ScoreTest {
 	
 		Assert.assertTrue(1>0);
 	}
+	@Test
+	public void testToString8() {
+	
+		Assert.assertTrue(1>0);
+	}
+
+	
 
 
 }

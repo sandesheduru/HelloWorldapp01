@@ -44,5 +44,9 @@ jobs:
       - name: Step 8 - Docker build and push to ACR
         run: |
           docker build . -t rahultestwebapp04acr.azurecr.io/demo:latest
-          docker push rahultestwebapp04acr.azurecr.io/demo:latest           
+          docker push rahultestwebapp04acr.azurecr.io/demo:latest 
+          
+      - name: Docker run
+        run:  docker run -d -p 8080:8080 demo
+     
  

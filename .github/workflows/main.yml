@@ -36,37 +36,37 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
           
-      - name: Running unit test
+      - name: Step 5 Running unit test
         run: mvn -B test --file pom.xml
         
-      - name: Publish Unit Test Results
+      - name: Step 6 Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
           files: target/surefire-reports/**/*.xml
           
-      - name: Step 5- Build and code analyze
+      - name: Step 7- Build and code analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orgtest-rahul_helloworldWebapp05
 
-      - name: Step 6 - build with maven
+      - name: Step 8 - build with maven
         run: mvn -B package --file pom.xml
 
-      - name: step-7 ACR login
+      - name: step-9 ACR login
         uses: azure/docker-login@v1
         with:
           login-server: rahultestwebapp04acr.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Step 8 - Docker build and push to ACR
+      - name: Step 10 - Docker build and push to ACR
         run: |
           docker build . -t rahultestwebapp04acr.azurecr.io/demo:latest
           docker push rahultestwebapp04acr.azurecr.io/demo:latest
 
-      - name: Step 9 -Upload artifact for deployment job
+      - name: Step 11 -Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app

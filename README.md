@@ -7,6 +7,8 @@
 
 * Build and Deploy to Azure Web App
 * Build and create Docker image and push to ACR, then run through webapp using Webhook
+* Code an analysis is through Sonarcloud 
+* Junit is used for Unit test execution
 
 
 ## What happened
@@ -33,5 +35,5 @@ Source | Url
 src/main/java/Hello.java | https://rahultestwebapp04.azurewebsites.net/demo/Hello
 src/main/webapp/index.jsp | https://rahultestwebapp04.azurewebsites.net/demo/index.jsp
 
-
+Sonar cloud code analysis Result -- https://sonarcloud.io/dashboard?id=orgtest-rahul_helloworldWebapp05
 

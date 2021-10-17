@@ -1,6 +1,4 @@
-# Build stage
-#
-FROM maven:3.6.3-0penjdk:11-jdk AS build
+FROM maven:3.5.4-jdk-8-alpine AS build
 COPY src /helloworldWebapp05/src/
 COPY pom.xml /helloworldWebapp05
 RUN mvn -f /helloworldWebapp05/pom.xml clean package

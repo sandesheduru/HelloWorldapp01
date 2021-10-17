@@ -40,6 +40,14 @@ jobs:
           login-server: rahultestwebapp04acr.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
+          
+      - name: Step 7 List the current directory
+        run: ls -a
+        
+      - name: Step-8 List the target directory
+        run: |
+          cd target
+          ls -a 
 
       - name: Step 8 - Docker build 
         run: |

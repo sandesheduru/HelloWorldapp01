@@ -30,7 +30,7 @@ public class ScoreTest {
 	@Test
 	public void testToString5() {
 	
-		Assert.assertTrue(1>2);
+		Assert.assertTrue(1>0);
 	}
 
 

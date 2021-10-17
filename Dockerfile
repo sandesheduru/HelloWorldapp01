@@ -10,6 +10,6 @@ RUN mvn -f /helloworldWebapp05/pom.xml clean package
 # Package stage
 #
 FROM openjdk:11-jre-slim
-COPY --from=build target/demo.war /usr/local/lib/demo.war
+ADD target/demo.war /usr/local/lib/demo.war
 EXPOSE 8080
 ENTRYPOINT ["java","-war","/usr/local/lib/demo.war"]

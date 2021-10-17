@@ -1,9 +1,9 @@
-# Java Web App
+# Hello world Java Application
 
-[![Build and deploy Java app](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/main.yml/badge.svg)](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/main.yml)
+Build Status -- [![Build and deploy Java app](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/main.yml/badge.svg)](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/main.yml)
 
-# Terraform Resource Creation
-[![Terraform Apply](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/terraformApply.yml/badge.svg)](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/terraformApply.yml)
+
+Resource creation through terraform status --[![Terraform Apply](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/terraformApply.yml/badge.svg)](https://github.com/orgtest-rahul/helloworldWebapp05/actions/workflows/terraformApply.yml)
 
 
 

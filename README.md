@@ -24,6 +24,5 @@ Source | Url
 --- | ---
 URL1 | https://rahultestwebapp04.azurewebsites.net/demo/Hello
 URL2 | https://rahultestwebapp04.azurewebsites.net/demo/index.jsp
-URL -ACR | https://rahultestwebapp08.azurewebsites.net/demo/Hello
 Sonar cloud code analysis Result | https://sonarcloud.io/dashboard?id=orgtest-rahul_helloworldWebapp05
 

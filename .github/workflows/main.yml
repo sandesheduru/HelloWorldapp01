@@ -40,6 +40,14 @@ jobs:
       - name: Step 5 Running unit test
         run: mvn -B test --file pom.xml
         
+      - name: Step 7 List the current directory
+        run: ls -a
+        
+      - name: Step-8 List the target directory
+        run: |
+          cd target
+          ls -a 
+        
       - name: Step 6 Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()

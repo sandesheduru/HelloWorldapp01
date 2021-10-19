@@ -47,6 +47,11 @@ jobs:
         run: |
           cd target
           ls -a 
+          
+      - name: Step-8 List the target directory
+        run: |
+          cd surefire-reports
+          ls -a          
         
       - name: Step 6 Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1

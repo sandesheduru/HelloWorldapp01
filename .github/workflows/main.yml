@@ -1,0 +1,59 @@
+name: Build and deploy Application Demo 2
+
+on:
+  push:
+    branches:
+      - demo
+  pull_request:
+    branches: [ demo ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    
+    steps:
+      - name: Step 1- Checkout
+        uses: actions/checkout@v2
+
+      - name: Step 2- Set up Java version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          
+      - name: Step 3- Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+          
+      - name: Step 4- Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+          
+      - name: Step 5 Running unit test
+        run: mvn -B test --file pom.xml
+        
+      - name: Step-6 List the target directory
+        run: |
+          cd target/surefire-reports
+          ls -a          
+        
+      - name: Step 7 Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: target/surefire-reports/**/*.xml
+          
+      - name: Step 8- Build and code analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEMO_GIT }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TK }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sandesheduru
+
+      - name: Step 9 - build with maven
+        run: mvn -B package --file pom.xml

@@ -48,3 +48,12 @@ jobs:
         if: always()
         with:
           files: target/surefire-reports/**/*.xml
+          
+      - name: Step 8- Build and code analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orgtest-demo_helloworldWebapp05
+
+      - name: Step 9 - build with maven
+        run: mvn -B package --file pom.xml

@@ -52,7 +52,7 @@ jobs:
       - name: Step 8- Build and code analyze
         env:
           GITHUB_TOKEN: ${{ secrets.DEMO_GIT }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TK }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sandesheduru
 
       - name: Step 9 - build with maven

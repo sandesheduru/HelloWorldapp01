@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Java app
+name: Build and deploy Application Demo 2
 
 on:
   push:
@@ -9,14 +6,12 @@ on:
       - master
   pull_request:
     branches: [ master ]
-  workflow_dispatch:
-  
-  
-  
+    
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
+    
     steps:
       - name: Step 1- Checkout
         uses: actions/checkout@v2
@@ -43,74 +38,22 @@ jobs:
       - name: Step 5 Running unit test
         run: mvn -B test --file pom.xml
         
-      - name: Step 7 List the current directory
-        run: ls -a
-        
-      - name: Step-8 List the target directory
-        run: |
-          cd target
-          ls -a 
-          
-      - name: Step-8 List the target directory
+      - name: Step-6 List the target directory
         run: |
           cd target/surefire-reports
           ls -a          
         
-      - name: Step 6 Publish Unit Test Results
+      - name: Step 7 Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
           files: target/surefire-reports/**/*.xml
           
-      - name: Step 7- Build and code analyze
+      - name: Step 8- Build and code analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orgtest-rahul_helloworldWebapp05
+          GITHUB_TOKEN: ${{ secrets.DEMO_GIT }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TK }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sandesheduru
 
-      - name: Step 8 - build with maven
+      - name: Step 9 - build with maven
         run: mvn -B package --file pom.xml
-
-      - name: step-9 ACR login
-        uses: azure/docker-login@v1
-        with:
-          login-server: rahultestwebapp04acr.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Step 10 - Docker build and push to ACR
-        run: |
-          docker build . -t rahultestwebapp04acr.azurecr.io/demo:latest
-          docker push rahultestwebapp04acr.azurecr.io/demo:latest
-
-      - name: Step 11 -Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.war'
-
-
-      
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    steps:
-      - name: Step 1- Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
-
-      - name: Step 2- Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'rahultestwebapp04'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
-          package: '*.war'
-      
-     

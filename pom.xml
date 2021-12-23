@@ -27,7 +27,7 @@
   </build>
   
   <properties>
-  <sonar.organization>orgtest-rahul</sonar.organization>
+  <sonar.organization>sandesheduru</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
   

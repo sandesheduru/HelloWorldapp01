@@ -37,3 +37,14 @@ jobs:
           
       - name: Step 5 Running unit test
         run: mvn -B test --file pom.xml
+        
+      - name: Step-6 List the target directory
+        run: |
+          cd target/surefire-reports
+          ls -a          
+        
+      - name: Step 7 Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: target/surefire-reports/**/*.xml
